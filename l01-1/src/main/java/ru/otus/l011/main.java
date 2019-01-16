@@ -4,7 +4,7 @@ import com.google.common.collect.HashMultiset;
 
 import java.util.*;
 
-public class main {
+public class Main {
     private static final String INPUT_TEXT = "Hello World! Hello All! Hi World!";
 
     public static void main(String[] args) {
