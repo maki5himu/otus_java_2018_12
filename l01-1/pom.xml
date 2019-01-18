@@ -8,15 +8,18 @@
     <artifactId>l011</artifactId>
     <version>1.0-SNAPSHOT</version>
     <build>
+
+        <finalName>${project.name}</finalName>
+
         <plugins>
-            <plugin>
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>8</source>
                     <target>8</target>
                 </configuration>
-            </plugin>
+            </plugin>-->
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -64,7 +67,7 @@
                 <configuration>
                     <proguardVersion>6.0.3</proguardVersion>
                     <obfuscate>true</obfuscate>
-                    <!--<outjar>L01.1.2-release.jar</outjar>-->
+                   <outjar>L01.1.2-release.jar</outjar>
 
                     <options>
                         <option>-keep public class ru.otus.l011.Main {public static void main(java.lang.String[]);}</option>
