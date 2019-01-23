@@ -6,28 +6,36 @@
 
     <groupId>ru.otus.l011</groupId>
     <artifactId>l011</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <com.google.guava.version>23.0</com.google.guava.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>23.0</version>
+        </dependency>
+    </dependencies>
+
     <build>
 
         <finalName>${project.name}</finalName>
 
         <plugins>
-            <!--<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>-->
-
+            <!--Assembly-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.0.0</version>
                 <executions>
                     <execution>
-                        <id>my-maven-assembly-plugin</id>
+                        <id>assembly</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
@@ -47,6 +55,7 @@
                 </configuration>
             </plugin>
 
+            <!--Obfuscation-->
             <plugin>
                 <groupId>com.github.wvengen</groupId>
                 <artifactId>proguard-maven-plugin</artifactId>
@@ -67,12 +76,17 @@
                 <configuration>
                     <proguardVersion>6.0.3</proguardVersion>
                     <obfuscate>true</obfuscate>
-                   <outjar>L01.1.2-release.jar</outjar>
-
+                    <injar>${project.build.finalName}.jar</injar>
+                    <outjar>${project.build.finalName}-obfuscate.jar</outjar>
                     <options>
                         <option>-keep public class ru.otus.l011.Main {public static void main(java.lang.String[]);}</option>
                         <option>-dontwarn</option>
+                        <option>-dontshrink</option>
                     </options>
+                    <libs>
+                        <lib>${java.home}/lib/rt.jar</lib>
+                    </libs>
+                    <addMavenDescriptor>true</addMavenDescriptor>
 
                 </configuration>
             </plugin>
@@ -81,20 +95,5 @@
     </build>
 
     <name>l01-1</name>
-
-    <dependencies>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>23.0</version>
-            </dependency>
-    </dependencies>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-        <com.google.guava.version>23.0</com.google.guava.version>
-    </properties>
 
 </project>
